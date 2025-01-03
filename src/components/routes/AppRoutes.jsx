@@ -5,21 +5,21 @@ import SignIn from "../../pages/auth/SignIn";
 import SignUp from "../../pages/auth/SignUp";
 import MainPage from "../../pages/MainPage";
 import NotFound from "../../pages/NotFound";
-import PostList from "../../pages/post/PostList";
 import Unauthorized from "../../pages/Unauthorized";
-
-import PostWrite from "../../pages/post/PostWrite";
-import ProtectedRoute from "./ProtectedRoute";
-import PostDetail from "../../pages/post/PostDetail";
+import FindAccount from "../../pages/auth/FindAccount";
+import NewChatArea from "../../pages/chat/NewChatArea";
 
 const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<MainPage />} initial={true} />
-      <Route path="/SignIn" element={<SignIn />} />
-      <Route path="/SignUp" element={<SignUp />} />
+      <Route path="/auth/signin" element={<SignIn />} />
+      <Route path="/auth/signup" element={<SignUp />} />
+      <Route path="/auth/findaccount" element={<FindAccount />} />
 
-      <Route path="/PostDetail/:postId" element={<PostDetail />} />
+      <Route path="/chat/newchatarea" element={<NewChatArea />} />
+
+      {/* <Route path="/PostDetail/:postId" element={<PostDetail />} />
       <Route path="/PostList" element={<PostList />} />
       
       <Route
@@ -29,7 +29,8 @@ const AppRoutes = () => {
             <PostWrite />
           </ProtectedRoute>
         }
-      />
+      /> */}
+
       <Route path="/unauthorized" element={<Unauthorized />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

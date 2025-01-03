@@ -1,10 +1,157 @@
 .sidebar {
-  width: 260px;
-  height: 100vh;
-  background-color: #f8f9fa;
-  padding: 20px;
+  width: 280px;
+  background-color: #f8f9fb;
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid #e9ecef;
+  border-right: 1px solid #e5e7eb;
+  transition: all 0.3s ease;
+}
+
+.sidebar.collapsed {
+  width: 72px;
+  padding: 16px 8px;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.brand {
+  font-size: 20px;
+  font-weight: 500;
+  color: #111827;
+  transition: opacity 0.3s ease;
+}
+
+.collapsed .brand {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+.collapse-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0.6;
+  padding: 4px 8px;
+  font-size: 16px;
+  color: #6b7280;
+}
+
+.new-chat-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #eef1ff;
+  color: #4b5563;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 24px;
+  white-space: nowrap;
+}
+
+.button-text {
+  transition: opacity 0.3s ease;
+}
+
+.collapsed .button-text {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+.chat-history {
+  flex: 1;
   overflow-y: auto;
+  transition: opacity 0.3s ease;
+}
+
+.collapsed .chat-history {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+.history-section {
+  margin-bottom: 24px;
+}
+
+.history-section h3 {
+  color: #6b7280;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.history-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.history-section li {
+  color: #4b5563;
+  padding: 8px;
+  margin-bottom: 4px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.history-section li:hover {
+  background-color: #f3f4f6;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.profile-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.profile-text {
+  transition: opacity 0.3s ease;
+}
+
+.collapsed .profile-text {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+.collapsed-icons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.collapsed-icons svg {
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.collapsed-icons svg:hover {
+  background-color: #f3f4f6;
+}
+
+.collapsed .new-chat-button {
+  padding: 8px;
+  display: flex;
+  justify-content: center;
 }

@@ -61,18 +61,6 @@ const NewChatArea = () => {
         { type: "bot", content: "" },
       ]);
 
-      const processLine = (line) => {
-        if (line.startsWith("data: ")) {
-          const content = line.slice(6);
-          botResponse += content;
-          setMessages((prevMessages) => {
-            const newMessages = [...prevMessages];
-            newMessages[newMessages.length - 1].content = botResponse;
-            return newMessages;
-          });
-        }
-      };
-
       while (true) {
         const { value, done } = await reader.read();
         if (done) break;
@@ -81,7 +69,15 @@ const NewChatArea = () => {
         const lines = text.split("\n");
 
         for (const line of lines) {
-          processLine(line);
+          if (line.startsWith("data: ")) {
+            const content = line.slice(6);
+            botResponse += content;
+            setMessages((prevMessages) => {
+              const newMessages = [...prevMessages];
+              newMessages[newMessages.length - 1].content = botResponse;
+              return newMessages;
+            });
+          }
         }
       }
     } catch (error) {
@@ -90,7 +86,7 @@ const NewChatArea = () => {
         ...prevMessages,
         {
           type: "bot",
-          content: "죄송합니다. 오류가 발생했습니다. 다시 시도해주세요.",
+          content: "Sorry, I encountered an error. Please try again.",
         },
       ]);
     } finally {
@@ -116,13 +112,23 @@ const NewChatArea = () => {
                 <WhaleIcon />
               </div>
             )}
-            <div className={`message-bubble ${message.type}-bubble`}>
+            <div className="message-content">
               {message.content.split("\n").map((line, i) => (
                 <p key={i}>{line}</p>
               ))}
             </div>
           </div>
         ))}
+        {isLoading && (
+          <div className="message bot-message">
+            <div className="message-avatar">
+              <WhaleIcon />
+            </div>
+            <div className="message-content">
+              <p>Thinking...</p>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="chat-input-container">
@@ -165,11 +171,16 @@ const NewChatArea = () => {
             </button>
           </div>
           <div className="action-buttons">
+            <button type="button" className="action-button send-button">
+              <i className="icon-send"></i>
+              <span>🔗</span>
+            </button>
             <button
               type="submit"
               className="action-button send-button"
               disabled={isLoading}
             >
+              <i className="icon-send"></i>
               <ArrowIcon direction="up" isActive={!isLoading} />
             </button>
           </div>

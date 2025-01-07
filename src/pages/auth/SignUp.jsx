@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import WhaleIcon from "../../components/icons/WhaleIcon";
 import "./SignUp.css";
+import { fastapi } from "../../utils/axios";
 
 const SignUp = () => {
+  const Navigate = useNavigate();
   const [formData, setFormData] = useState({
-    username: "",
+    name: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -19,10 +21,23 @@ const SignUp = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // 여기에 회원가입 로직을 구현합니다.
-    console.log("회원가입 데이터:", formData);
+
+    if (formData.password !== formData.confirmPassword) {
+      alert("비밀번호가 일치하지 않습니다.");
+      return;
+    }
+
+    fastapi("post", "/api/user/create", formData).then((response) => {
+      if (!response.success) {
+        alert(response.data.detail);
+        return;
+      }
+
+      alert("회원가입이 완료되었습니다.");
+      Navigate("/auth/signin");
+    });
   };
 
   return (
@@ -38,12 +53,12 @@ const SignUp = () => {
           <h2>회원가입</h2>
           <form onSubmit={handleSubmit} className="signup-form">
             <div className="form-group">
-              <label htmlFor="username">사용자 이름</label>
+              <label htmlFor="name">사용자 이름</label>
               <input
                 type="text"
-                id="username"
-                name="username"
-                value={formData.username}
+                id="name"
+                name="name"
+                value={formData.name}
                 onChange={handleChange}
                 required
               />

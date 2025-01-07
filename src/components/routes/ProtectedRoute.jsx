@@ -32,11 +32,6 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
     return children;
   }
 
-  // 사용자가 허용된 역할 중 하나라도 가지고 있는지 확인 (roles)
-  // const hasAllowedRole = allowedRoles.some((role) =>
-  //   loggedUser.roles.includes(role),
-  // );
-
   // 사용자의 역할이 허용된 역할 목록에 포함되어 있는지 확인 (role)
   const hasAllowedRole = allowedRoles.includes(loggedUser.role);
 

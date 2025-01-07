@@ -2,7 +2,7 @@ import axios from "axios";
 
 const api = axios.create({
   baseURL: "http://localhost:8000",
-  timeout: 5000,
+  timeout: 10000,
   headers: {
     "Content-Type": "application/json; charset=utf-8",
   },
@@ -30,4 +30,17 @@ api.interceptors.response.use(
   },
 );
 
-export default api;
+export async function fastapi(method, url, data = null) {
+  try {
+    const response = await api[method.toLowerCase()](url, data);
+    return {
+      success: true,
+      data: response.data,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      data: error.response?.data || error.response,
+    };
+  }
+}

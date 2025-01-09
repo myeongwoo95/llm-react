@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import "./NewChatArea.css";
 import WhaleIcon from "../../components/icons/WhaleIcon";
 import ArrowIcon from "../../components/icons/ArrowIcon";
+import { getToken } from "../../utils/localStorage";
 
 const NewChatArea = () => {
   const [inputMessage, setInputMessage] = useState("");
@@ -44,10 +45,12 @@ const NewChatArea = () => {
     setIsLoading(true);
 
     try {
+      const token = getToken();
       const response = await fetch("http://localhost:8000/api/chat/stream", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // 토큰 추가
         },
         body: JSON.stringify({ text: userMessage.content }),
       });

@@ -3,6 +3,7 @@ import "./Sidebar.css";
 import ChatIcon from "../icons/ChatIcon";
 import HistoryIcon from "../icons/HistoryIcon";
 import NewChatIcon from "../icons/NewChatIcon";
+import ProfileMenu from "../profile-menu/ProfileMenu";
 
 const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -62,9 +63,8 @@ const Sidebar = () => {
         )}
       </div>
 
-      <div className="profile">
-        <img src="/chicken.jpg" alt="Profile" className="profile-avatar" />
-        <span className="profile-text">My Profile</span>
+      <div className="sidebar-footer">
+        <ProfileMenu />
       </div>
     </div>
   );

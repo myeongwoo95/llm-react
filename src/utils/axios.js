@@ -11,8 +11,8 @@ const api = axios.create({
 // axios request 인터셉터
 api.interceptors.request.use(
   (config) => {
-    // const token = localStorage.getItem("jwt");
-    // if (token) config.headers["Authorization"] = `Bearer ${token}`;
+    const token = localStorage.getItem("jwt");
+    if (token) config.headers["Authorization"] = `Bearer ${token}`;
     return config;
   },
   (error) => {

@@ -3,7 +3,7 @@ import { getToken, getUserInfo } from "../utils/localStorage";
 
 const AuthContext = createContext({
   loggedUser: {
-    id: "",
+    userId: "",
     name: "",
     email: "",
   },

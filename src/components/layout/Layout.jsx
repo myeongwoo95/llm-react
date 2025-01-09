@@ -7,6 +7,8 @@ const Layout = ({ children }) => {
   const location = useLocation();
   const layoutPaths = [
     "/",
+    "/notfound",
+    "/unauthorized",
     "/auth/signup",
     "/auth/signin",
     "/auth/findaccount",

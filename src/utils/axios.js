@@ -30,9 +30,10 @@ api.interceptors.response.use(
   },
 );
 
-export async function fastapi(method, url, data = null) {
+export async function fastapi(method, url, data = null, headers = null) {
   try {
-    const response = await api[method.toLowerCase()](url, data);
+    const config = headers ? { headers } : {};
+    const response = await api[method.toLowerCase()](url, data, config);
     return {
       success: true,
       data: response.data,

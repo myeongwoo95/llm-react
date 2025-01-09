@@ -8,6 +8,7 @@ import NotFound from "../../pages/NotFound";
 import Unauthorized from "../../pages/Unauthorized";
 import FindAccount from "../../pages/auth/FindAccount";
 import NewChatArea from "../../pages/chat/NewChatArea";
+import ProtectedRoute from "./ProtectedRoute";
 
 const AppRoutes = () => {
   return (
@@ -17,20 +18,14 @@ const AppRoutes = () => {
       <Route path="/auth/signup" element={<SignUp />} />
       <Route path="/auth/findaccount" element={<FindAccount />} />
 
-      <Route path="/chat/newchatarea" element={<NewChatArea />} />
-
-      {/* <Route path="/PostDetail/:postId" element={<PostDetail />} />
-      <Route path="/PostList" element={<PostList />} />
-      
       <Route
-        path="/PostWrite"
+        path="/chat/newchatarea"
         element={
-          <ProtectedRoute allowedRoles={[ROLES.USER]}>
-            <PostWrite />
+          <ProtectedRoute>
+            <NewChatArea />
           </ProtectedRoute>
         }
-      /> */}
-
+      />
       <Route path="/unauthorized" element={<Unauthorized />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

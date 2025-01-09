@@ -5,7 +5,7 @@ import "./SignUp.css";
 import { fastapi } from "../../utils/axios";
 
 const SignUp = () => {
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -36,7 +36,7 @@ const SignUp = () => {
       }
 
       alert("회원가입이 완료되었습니다.");
-      Navigate("/auth/signin");
+      navigate("/auth/signin");
     });
   };
 

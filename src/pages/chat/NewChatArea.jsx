@@ -44,7 +44,7 @@ const NewChatArea = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://localhost:8000/stream", {
+      const response = await fetch("http://localhost:8000/api/chat/stream", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

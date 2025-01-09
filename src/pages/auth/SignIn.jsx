@@ -1,9 +1,15 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import WhaleIcon from "../../components/icons/WhaleIcon";
 import "./SignIn.css";
+import { fastapi } from "../../utils/axios";
+import { saveToken, saveUserInfo } from "../../utils/localStorage";
+import AuthContext from "../../context/AuthContext";
 
 const SignIn = () => {
+  const navigate = useNavigate();
+  const { setLoggedUser, setLoggedIn } = useContext(AuthContext);
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -19,8 +25,33 @@ const SignIn = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // 여기에 로그인 로직을 구현합니다.
-    console.log("로그인 데이터:", formData);
+
+    const formBody = new URLSearchParams();
+    formBody.append("username", formData.email);
+    formBody.append("password", formData.password);
+
+    fastapi("post", "/api/user/login", formBody, {
+      "Content-Type": "application/x-www-form-urlencoded",
+    }).then((response) => {
+      if (!response.success) {
+        alert(response.data.detail);
+        return;
+      }
+
+      const userInfo = {
+        userId: response.data.id,
+        name: response.data.name,
+        email: response.data.email,
+      };
+
+      saveToken(response.data.access_token);
+      saveUserInfo(userInfo);
+
+      setLoggedIn();
+      setLoggedUser(userInfo);
+
+      navigate("/chat/newchatarea");
+    });
   };
 
   return (

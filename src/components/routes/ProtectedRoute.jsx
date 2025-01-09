@@ -19,12 +19,13 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
   }, [loggedIn]);
 
   if (isLoading) {
+    console.log("Not logged in, redirecting..."); // 디버깅용 로그 추가
     return <div>Loading...</div>;
   }
 
   // 인증되지 않은 사용자는 로그인 페이지로 리다이렉트
   if (!loggedIn) {
-    return <Navigate to="/SignIn" replace />;
+    return <Navigate to="/auth/signin" replace />;
   }
 
   // allowedRoles가 제공되지 않은 경우, 모든 인증된 사용자에게 접근 허용

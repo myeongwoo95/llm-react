@@ -3,10 +3,9 @@ import { getToken, getUserInfo } from "../utils/localStorage";
 
 const AuthContext = createContext({
   loggedUser: {
-    userId: "",
+    id: "",
     name: "",
     email: "",
-    role: "",
   },
   loggedIn: false, // 로그인 여부
   setLoggedUser: () => {}, // 로그인한 사용자 정보 저장
